@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Lexon AI: huquqiy savollarga o'zbek tilida, qonun manbasi bilan javob, elektron kutubxona va kurslar."><meta property="og:title" content="Lexon AI"><meta property="og:description" content="Huquqiy AI yordamchi, elektron kutubxona va kurslar."><title>Lexon AI — huquqiy savollarga o'zbek tilida, manba bilan javob</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7f6;--panel:#fff;--ink:#12262d;--mute:#4d6168;--line:#d5dfdd;--teal:#17646e;--teal-ink:#fff;--seal:#a9741b;--soft:#e4efed;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1b20;--panel:#15272e;--ink:#e8f0ee;--mute:#9db1b6;--line:#294049;--teal:#5cc0c9;--teal-ink:#08191d;--seal:#e0b25a;--soft:#1a3038}}
+:root[data-theme="dark"]{--bg:#0e1b20;--panel:#15272e;--ink:#e8f0ee;--mute:#9db1b6;--line:#294049;--teal:#5cc0c9;--teal-ink:#08191d;--seal:#e0b25a;--soft:#1a3038}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Manrope,system-ui,sans-serif}
+h1,h2,h3{font-family:Newsreader,Georgia,serif;line-height:1.15;margin:0}
+h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+.lead{color:var(--mute);max-width:60ch}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.logo{font-family:Newsreader,serif;font-weight:700;font-size:1.5rem;color:var(--ink);text-decoration:none}
+.logo b{color:var(--seal)}
+nav{display:flex;gap:18px;align-items:center;overflow-x:auto}
+nav a{color:var(--mute);text-decoration:none;font-size:.95rem;white-space:nowrap}
+nav a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--teal);color:var(--teal-ink);border:0;border-radius:8px;padding:12px 20px;font:700 1rem Manrope,sans-serif;text-decoration:none;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.hero{padding:56px 0 72px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero p.lead{margin:20px 0 28px;font-size:1.1rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.chat{background:var(--panel);border:1.5px solid var(--ink);border-radius:14px;box-shadow:6px 6px 0 var(--seal);overflow:hidden}
+.chat-top{display:flex;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--line);font-size:.85rem;color:var(--mute)}
+.msgs{padding:16px;min-height:290px;display:flex;flex-direction:column;gap:12px}
+.q{align-self:flex-end;background:var(--soft);padding:10px 14px;border-radius:12px 12px 2px 12px;max-width:88%}
+.a{align-self:flex-start;max-width:96%}
+.a p{margin-bottom:10px}
+.src{border-left:4px solid var(--seal);padding:6px 12px;font-size:.88rem;color:var(--mute);background:var(--bg)}
+.hint{color:var(--mute);font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-top:1px solid var(--line)}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:7px 14px;font:500 .9rem Manrope,sans-serif;cursor:pointer}
+.chip:hover,.chip[aria-pressed="true"]{border-color:var(--teal);background:var(--soft)}
+.note{font-size:.82rem;color:var(--mute);padding:0 16px 12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;border-top:1.5px solid var(--ink)}
+.step{padding:22px 24px 0 0}
+.step span{font-family:Newsreader,serif;font-size:2rem;color:var(--seal);font-weight:700}
+.step p{color:var(--mute);margin-top:6px}
+.tools{margin-top:32px;border-top:1px solid var(--line)}
+.tool{display:grid;grid-template-columns:220px 1fr auto;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.tool p{color:var(--mute)}
+.tag{font-size:.82rem;border:1px solid var(--line);border-radius:999px;padding:2px 12px;color:var(--mute);white-space:nowrap}
+.tag.now{border-color:var(--teal);color:var(--teal)}
+.tabs{display:flex;gap:8px;margin:28px 0 20px}
+.tab{padding:10px 20px;border:1.5px solid var(--line);border-radius:8px;background:transparent;color:var(--ink);font:700 1rem Manrope,sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.seg-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.seg{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px}
+.seg h3{margin-bottom:6px}
+.seg p{color:var(--mute);font-size:.95rem}
+.seg b{display:block;margin-top:10px;font-size:.9rem}
+.alt-bg{background:var(--soft)}
+.courses{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;margin-top:28px}
+.course{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+.course ul{margin:12px 0 0;padding-left:20px;color:var(--mute)}
+.road{margin:32px 0 0;padding:0;list-style:none;border-left:2px solid var(--ink)}
+.road li{padding:0 0 24px 24px;position:relative}
+.road li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--seal)}
+.road li.done::before{background:var(--teal)}
+.road strong{display:block}
+.road span{color:var(--mute)}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;margin-top:28px}
+.trust p{color:var(--mute);margin-top:6px}
+.news{border:1.5px dashed var(--line);border-radius:10px;padding:28px;margin-top:24px;color:var(--mute)}
+form{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+input,select{flex:1 1 200px;padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:500 1rem Manrope,sans-serif}
+#ok{margin-top:14px;font-weight:700;color:var(--teal)}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--mute);font-size:.9rem}
+footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
+@media(max-width:820px){
+.hero-grid,.courses,.steps{grid-template-columns:1fr}
+.tool{grid-template-columns:1fr;gap:6px}
+section{padding:52px 0}
+.step{padding-bottom:16px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.ask{display:flex;gap:8px;padding:0 16px 12px}.ask input{flex:1 1 auto;min-width:0;padding:10px 12px}.ask .btn{padding:10px 16px}
+.a.live{white-space:pre-wrap}.err{color:var(--seal);font-size:.9rem}
+.cat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.book{border:1px solid var(--line);border-radius:8px;padding:16px;background:var(--panel)}.book h3{font-size:1.05rem}.book p{color:var(--mute);font-size:.9rem;margin:4px 0 10px}
+.an{margin-top:32px;background:var(--panel);border:1.5px solid var(--ink);border-radius:12px;padding:20px}
+.an textarea{width:100%;min-height:120px;padding:12px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:500 .95rem Manrope,sans-serif}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.out{white-space:pre-wrap;margin-top:12px;padding:12px;background:var(--bg);border-left:4px solid var(--seal);min-height:24px}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:28px}
+.plan{border:1px solid var(--line);border-radius:10px;padding:22px;background:var(--panel)}.plan.pro{border:1.5px solid var(--teal)}
+.plan ul{padding-left:18px;margin:12px 0 0;color:var(--mute)}
+#fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9;box-shadow:3px 3px 0 var(--seal)}
+#help{position:fixed;right:16px;bottom:calc(72px + env(safe-area-inset-bottom,0px));z-index:9;width:min(360px,calc(100vw - 32px));max-height:70vh;display:flex;flex-direction:column}
+#help[hidden]{display:none}#help .msgs{min-height:180px;overflow-y:auto;flex:1}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap bar">
+<a class="logo" href="#top">Lexon<b>.</b>AI</a>
+<nav aria-label="Asosiy menyu">
+<a href="#bot">AI bot</a><a href="#vositalar">Vositalar</a><a href="#kutubxona">Kutubxona</a><a href="#tariflar">Tariflar</a><a href="#kimlar">Kimlar uchun</a><a href="#kurslar">Kurslar</a><a href="#yangiliklar">Yangiliklar</a><a href="#aloqa">Aloqa</a>
+</nav>
+</div>
+</header>
+
+<main id="top">
+<div class="wrap hero" id="bot">
+<div class="hero-grid">
+<div>
+<h1>Huquqiy savolingizga oddiy o'zbek tilida, qonun manbasi bilan javob.</h1>
+<p class="lead">Lexon AI qonunlarni siz uchun o'qiydi, qaysi modda va qaysi hujjatga tayanganini ko'rsatadi va nima qilish kerakligini qadamlarga bo'lib beradi.</p>
+<div class="cta"><a class="btn" href="#aloqa">Kutish ro'yxatiga yozilish</a><a class="btn alt" href="#vositalar">Imkoniyatlarni ko'rish</a></div>
+</div>
+<div class="chat" role="region" aria-label="Lexon AI namuna suhbat">
+<div class="chat-top"><span>Lexon AI</span><span>Namuna suhbat</span></div>
+<div class="msgs" id="msgs" aria-live="polite"><p class="hint">Pastdagi savollardan birini tanlang va javob qanday ko'rinishini ko'ring.</p></div>
+<div class="chips" id="chips"></div>
+<form class="ask" id="f1"><input type="text" id="i1" placeholder="O'z savolingizni yozing" aria-label="Savolingiz"><button class="btn" type="submit">Yuborish</button></form>
+<p class="note">Tayyor savollar namuna. O'z savolingizga jonli AI javob beradi (huquqiy bilimlar bazasi hali ulanmagan). Yuridik maslahat emas.</p>
+</div>
+</div>
+</div>
+
+<section class="alt-bg" id="qanday">
+<div class="wrap">
+<h2>Qanday ishlaydi</h2>
+<div class="steps">
+<div class="step"><span>1</span><h3>Savol bering</h3><p>Matn yoki ovoz orqali, o'zingiz bilgan oddiy so'zlar bilan.</p></div>
+<div class="step"><span>2</span><h3>Manbani toping</h3><p>Bot rasmiy qonun matnlaridan mos moddalarni topadi.</p></div>
+<div class="step"><span>3</span><h3>Aniq javob oling</h3><p>Javob, manba va keyingi qadamlar. Bilmasa, buni ochiq aytadi.</p></div>
+</div>
+</div>
+</section>
+
+<section id="vositalar">
+<div class="wrap">
+<h2>Vositalar</h2>
+<p class="lead" style="margin-top:12px">Savol-javobdan tashqari, huquqiy ishni tezlashtiradigan vositalar. Ular navbat bilan chiqadi.</p>
+<div class="tools">
+<div class="tool"><h3>Manbali javoblar</h3><p>Har javobda qonun nomi, modda va havola. Boshida mehnat va iste'molchi huquqlari.</p><span class="tag now">Birinchi</span></div>
+<div class="tool"><h3>Elektron kutubxona</h3><p>O'qituvchilar kitoblarini elektron shaklda chiqaradi, o'quvchilar o'qiydi va kitob bo'yicha botdan so'raydi.</p><span class="tag">Yangi</span></div>
+<div class="tool"><h3>Hujjat generatori</h3><p>Ariza, shikoyat, shartnoma. Savollarga javob bering, Word yoki PDF oling.</p><span class="tag">Keyingi</span></div>
+<div class="tool"><h3>Shartnoma tahlili</h3><p>Hujjatni yuklang: xavfli bandlar, muddatlar va yetishmayotgan qismlarni ko'ring.</p><span class="tag">Keyingi</span></div>
+<div class="tool"><h3>Ovozli savol</h3><p>Yozishni xohlamasangiz, o'zbek tilida gapiring.</p><span class="tag">Rejada</span></div>
+<div class="tool"><h3>Qonun o'zgarishi haqida xabar</h3><p>Qiziqqan sohangizda yangilik chiqsa, Telegramda xabar keladi.</p><span class="tag">Rejada</span></div>
+</div>
+</div>
+</section>
+
+<section class="alt-bg" id="kimlar">
+<div class="wrap">
+<h2>Kimlar uchun</h2>
+<div class="tabs" role="tablist" aria-label="Foydalanuvchi turi">
+<button class="tab" role="tab" id="t-b2c" aria-selected="true" aria-controls="p-b2c">Yakka foydalanuvchi</button>
+<button class="tab" role="tab" id="t-b2b" aria-selected="false" aria-controls="p-b2b">Kompaniya</button>
+</div>
+<div class="seg-list" id="p-b2c" role="tabpanel" aria-labelledby="t-b2c">
+<div class="seg"><h3>Oddiy fuqaro</h3><p>Ish haqi, ijara, oila, jarima va xarid nizolarida nima qilishni bilmoqchi bo'lganlar.</p><b>Kerak bo'ladi: Telegram bot, ariza generatori</b></div>
+<div class="seg"><h3>Talaba va yosh huquqshunos</h3><p>Qonunni tez topish, testlar va amaliy ko'nikma kerak bo'lganlar.</p><b>Kerak bo'ladi: kurslar, izohlangan moddalar</b></div>
+<div class="seg"><h3>Yakka tadbirkor</h3><p>Ro'yxatdan o'tish, soliq va shartnoma savollari bilan yolg'iz ishlayotganlar.</p><b>Kerak bo'ladi: shablonlar, shartnoma tahlili</b></div>
+</div>
+<div class="seg-list" id="p-b2b" role="tabpanel" aria-labelledby="t-b2b" hidden>
+<div class="seg"><h3>Kichik va o'rta biznes</h3><p>Doimiy yuristi yo'q yoki yurist band bo'lgan, shartnomalari ko'p kompaniyalar.</p><b>Kerak bo'ladi: hujjat tahlili, jamoa akkaunti</b></div>
+<div class="seg"><h3>Yuridik firmalar</h3><p>Takroriy ishni tezlashtirmoqchi bo'lgan advokatlik idoralari.</p><b>Kerak bo'ladi: manbali qidiruv, o'z shablonlari</b></div>
+<div class="seg"><h3>HR va buxgalteriya</h3><p>Mehnat shartnomasi, buyruq va xodim nizolari bilan ishlovchilar.</p><b>Kerak bo'ladi: mehnat huquqi rejimi</b></div>
+<div class="seg"><h3>Yirik tashkilotlar</h3><p>Ko'p hujjat va qat'iy maxfiylik talab qiladigan bank, sug'urta, mikromoliya.</p><b>Keyingi bosqichda</b></div>
+</div>
+</div>
+</section>
+
+<section id="kurslar">
+<div class="wrap">
+<h2>Lexon AI kurslari</h2>
+<p class="lead" style="margin-top:12px">AI vositalarini huquqiy ishda amalda qo'llashni o'rgatuvchi qisqa kurslar.</p>
+<div class="courses">
+<div class="course"><h3>AI bilan huquqiy tadqiqot</h3><p style="color:var(--mute);margin-top:6px">Bepul kirish dars: savolni to'g'ri berish, manbani tekshirish va xatoni ko'ra bilish.</p><ul><li>Qisqa videolar va konspekt</li><li>Amaliy topshiriqlar</li><li>Yakuniy test va sertifikat</li></ul></div>
+<div class="course"><h3>Rejadagi kurslar</h3><ul><li>Shartnomani AI bilan tahlil qilish</li><li>Tadbirkor uchun huquqiy asoslar</li><li>Yosh huquqshunos uchun AI vositalari</li></ul></div>
+</div>
+</div>
+</section>
+
+<section id="kutubxona" style="border-top:1px solid var(--line)">
+<div class="wrap">
+<h2>Elektron kutubxona</h2>
+<p class="lead" style="margin-top:12px">O'qituvchilar kitoblarini elektron shaklda chiqaradi: bepul yoki pullik. Bot har bir kitobni tahlil qilib, o'quvchi savoliga shu kitob asosida javob beradi. Kitoblar faqat muallif roziligi bilan joylanadi.</p>
+<div class="tabs" id="flt" role="group" aria-label="Filtr"><button class="tab" data-f="all" aria-selected="true">Hammasi</button><button class="tab" data-f="free" aria-selected="false">Bepul</button><button class="tab" data-f="paid" aria-selected="false">Pullik</button></div>
+<div class="cat" id="cat"></div>
+<p class="hint" style="margin-top:12px">Ro'yxatdagi kitoblar namuna. Haqiqiy kitoblar mualliflar bilan kelishilgach qo'shiladi.</p>
+<div class="an">
+<h3>Kitobni tahlil qildirib ko'ring</h3>
+<p class="hint">Kitob matnidan parcha kiriting yoki .txt faylni yuklang (12 000 belgigacha). Keyin bot nima qilishini tanlang.</p>
+<textarea id="bt" aria-label="Kitob matni" placeholder="Kitob matnini shu yerga qo'ying"></textarea>
+<div class="row"><input type="file" id="bf" accept=".txt,text/plain" aria-label="Matn fayl"><select id="ba" aria-label="Amal"><option value="Qisqa mazmun ber">Qisqa mazmun</option><option value="Asosiy tushunchalar va ularning izohini yoz">Asosiy tushunchalar</option><option value="5 ta test savoli tuz, to'g'ri javobi bilan">Test savollari</option><option value="Matn bo'yicha o'quv reja tuz">O'quv reja</option></select><button class="btn" id="bg" type="button">Tahlil qilish</button></div>
+<div class="out" id="bo" role="status"></div>
+</div>
+</div>
+</section>
+
+<section id="tariflar" style="border-top:1px solid var(--line)">
+<div class="wrap">
+<h2>Bepul va pullik xizmatlar</h2>
+<p class="lead" style="margin-top:12px">Asosiy imkoniyatlar hamma uchun ochiq bo'ladi. Pullik tariflar ko'proq hajm va vositalar beradi. Narxlar hali e'lon qilinmagan.</p>
+<div class="plans">
+<div class="plan"><h3>Bepul</h3><ul><li>Kuniga cheklangan savollar</li><li>Bepul kitoblarni o'qish</li><li>Kirish dars</li><li>Yangiliklar dayjesti</li></ul></div>
+<div class="plan pro"><h3>Standart (pullik)</h3><ul><li>Cheksiz savollar</li><li>Hujjat generatori</li><li>Shartnoma va kitob tahlili</li><li>Pullik kitoblar va kurslar</li></ul></div>
+<div class="plan"><h3>Biznes (pullik)</h3><ul><li>Jamoa akkauntlari</li><li>Kompaniya shablonlari</li><li>Ustuvor yordam</li><li>Maxsus sozlash</li></ul></div>
+<div class="plan"><h3>Mualliflar uchun</h3><ul><li>Kitobni bepul yoki pullik chiqarish</li><li>O'quvchilar statistikasi</li><li>Kitob tahlilini yoqish/o'chirish</li></ul></div>
+</div>
+</div>
+</section>
+
+<section class="alt-bg" id="yol">
+<div class="wrap">
+<h2>Yo'l xaritasi</h2>
+<ol class="road">
+<li class="done"><strong>Sayt va g'oya</strong><span>Platforma e'lon qilindi, hamjamiyat yig'ilmoqda.</span></li>
+<li><strong>Bot: birinchi versiya</strong><span>1–2 sohada, manbali javoblar, yopiq sinov.</span></li>
+<li><strong>Hujjat generatori va tahlili</strong><span>Shablonlar, yuklab olish, akkaunt.</span></li>
+<li><strong>Elektron kutubxona</strong><span>Mualliflar kitob yuklaydi, bot kitoblar bo'yicha savolga javob beradi.</span></li>
+<li><strong>Hamjamiyat va kurslar</strong><span>Savol-javob, advokatlar katalogi, pullik kurslar.</span></li>
+<li><strong>Kompaniyalar uchun yechim</strong><span>Jamoaviy akkaunt, maxsus sozlash.</span></li>
+</ol>
+</div>
+</section>
+
+<section id="ishonch">
+<div class="wrap">
+<h2>Ishonch va xavfsizlik</h2>
+<div class="trust">
+<div><h3>Manba ko'rsatiladi</h3><p>Har javob rasmiy qonun matniga havola bilan keladi, shunda o'zingiz tekshira olasiz.</p></div>
+<div><h3>Bilmasa, aytadi</h3><p>Ishonchli javob topilmasa, bot taxmin qilmaydi va mutaxassisga yo'naltiradi.</p></div>
+<div><h3>Advokat o'rnini bosmaydi</h3><p>Lexon AI ma'lumot beradi. Murakkab va jiddiy holatlarda advokatga murojaat qiling.</p></div>
+<div><h3>Hujjatlaringiz maxfiy</h3><p>Yuklangan hujjatlar faqat sizga tegishli va maxfiylik siyosatiga muvofiq saqlanadi.</p></div>
+</div>
+</div>
+</section>
+
+<section class="alt-bg" id="yangiliklar">
+<div class="wrap">
+<h2>Yangiliklar</h2>
+<div class="news">Haftalik dayjest tayyorlanmoqda: qonunchilikdagi o'zgarishlar va tushunarli izohlar. Birinchi son chiqqanda kutish ro'yxatidagilarga xabar beramiz.</div>
+</div>
+</section>
+
+<section id="aloqa">
+<div class="wrap">
+<h2>Birinchilardan bo'lib sinab ko'ring</h2>
+<p class="lead" style="margin-top:12px">Botning sinov versiyasi ochilganda sizga xabar beramiz.</p>
+<form id="wl">
+<input type="text" id="nm" placeholder="Ismingiz" aria-label="Ismingiz" required>
+<input type="text" id="ct" placeholder="Telegram yoki email" aria-label="Telegram yoki email" required>
+<select id="rl" aria-label="Siz kimsiz"><option>Yakka foydalanuvchi</option><option>Talaba / huquqshunos</option><option>Tadbirkor</option><option>O'qituvchi / muallif</option><option>Kompaniya vakili</option></select>
+<button class="btn" type="submit">Ro'yxatga yozilish</button>
+</form>
+<p id="ok" role="status"></p>
+</div>
+</section>
+</main>
+<button class="btn" id="fab" type="button" aria-expanded="false" aria-controls="help">Savol bering</button>
+<div class="chat" id="help" role="dialog" aria-label="Aloqa boti" hidden>
+<div class="chat-top"><span>Lexon AI yordam boti</span></div>
+<div class="msgs" id="m2" aria-live="polite"><p class="hint">Salom! Lexon AI, kutubxona, kurslar yoki xizmatlar haqida so'rang.</p></div>
+<form class="ask" id="f2" style="padding-top:12px"><input type="text" id="i2" placeholder="Savolingiz" aria-label="Savolingiz"><button class="btn" type="submit">Yuborish</button></form>
+</div>
+
+<footer>
+<div class="wrap"><span>Lexon AI, 2026. Huquqiy ma'lumot beradi, yuridik maslahat o'rnini bosmaydi.</span><span><span id="cn"></span> <a href="#top">Yuqoriga</a></span></div>
+</footer>
+
+<script>
+var demos=[
+{q:"Ish haqim 2 oydan beri to'lanmayapti. Nima qilaman?",a:["Ish beruvchi ish haqini belgilangan muddatda to'lashga majbur. Kechiktirilsa, avval yozma talabnoma bering, keyin mehnat inspeksiyasiga yoki sudga murojaat qilish mumkin.","Tayyorlab qo'yiladigan hujjatlar: mehnat shartnomasi, ish haqi to'g'risidagi ma'lumot, yozishmalar."],s:"Manba: Mehnat kodeksi, ish haqi to'lash bo'limi"},
+{q:"Ijara shartnomasida nimalar bo'lishi shart?",a:["Kamida taraflar, ijara narxi va to'lov muddati, ijara muddati, uy holati va depozit tartibi yozilgan bo'lishi kerak.","Shartnomani imzolashdan oldin uy holatini birga tekshirib, dalolatnoma tuzib qo'ying."],s:"Manba: Fuqarolik kodeksi, ijara shartnomasi bo'limi"},
+{q:"Sifatsiz mahsulotni qaytarib bera olamanmi?",a:["Ha, sifatsiz mahsulotni almashtirish, ta'mirlash yoki pulni qaytarishni talab qilish mumkin. Chek va xarid dalilini saqlang.","Sotuvchi rad etsa, yozma da'vo bering va keyin iste'molchilar huquqini himoya qiluvchi organga murojaat qiling."],s:"Manba: Iste'molchilar huquqlarini himoya qilish to'g'risidagi qonun"}
+];
+var msgs=document.getElementById("msgs"),chips=document.getElementById("chips");
+demos.forEach(function(d,i){
+var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=d.q;b.setAttribute("aria-pressed","false");
+b.onclick=function(){
+[].forEach.call(chips.children,function(c){c.setAttribute("aria-pressed","false")});
+b.setAttribute("aria-pressed","true");
+msgs.innerHTML="";
+var q=document.createElement("div");q.className="q";q.textContent=d.q;msgs.appendChild(q);
+var a=document.createElement("div");a.className="a";
+d.a.forEach(function(t){var p=document.createElement("p");p.textContent=t;a.appendChild(p)});
+var s=document.createElement("div");s.className="src";s.textContent=d.s;a.appendChild(s);
+msgs.appendChild(a);
+};
+chips.appendChild(b);
+});
+var tb=document.getElementById("t-b2b"),tc=document.getElementById("t-b2c"),pb=document.getElementById("p-b2b"),pc=document.getElementById("p-b2c");
+function sel(b2b){tb.setAttribute("aria-selected",b2b);tc.setAttribute("aria-selected",!b2b);pb.hidden=!b2b;pc.hidden=b2b}
+tb.onclick=function(){sel(true)};tc.onclick=function(){sel(false)};
+document.getElementById("wl").onsubmit=function(e){
+e.preventDefault();var f=this,o=document.getElementById("ok"),g=function(x){return document.getElementById(x).value};
+if(!CONFIG.FORM_URL){o.textContent="Ro'yxat hozircha ulanmagan. Keyinroq urinib ko'ring.";return}
+fetch(CONFIG.FORM_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:g("nm"),contact:g("ct"),role:g("rl")})}).then(function(r){if(!r.ok)throw 0;o.textContent="Rahmat! Sinov versiyasi ochilganda siz bilan bog'lanamiz.";f.reset()}).catch(function(){o.textContent="Yuborib bo'lmadi. Keyinroq urinib ko'ring."});
+};
+var cn=document.getElementById("cn");
+if(CONFIG.TELEGRAM){var t=document.createElement("a");t.href=CONFIG.TELEGRAM;t.textContent="Telegram";cn.appendChild(t);cn.appendChild(document.createTextNode(" "))}
+if(CONFIG.EMAIL){var m=document.createElement("a");m.href="mailto:"+CONFIG.EMAIL;m.textContent=CONFIG.EMAIL;cn.appendChild(m)}
+
+/* SOZLAMALAR: serveringiz tayyor bo'lgach to'ldiring */
+var CONFIG={API_URL:"",FORM_URL:"",TELEGRAM:"",EMAIL:""};
+var SYS1="legal",SYS2="help";
+async function ask(mode,hist,cb){
+if(!CONFIG.API_URL)throw{code:"none"};
+var r=await fetch(CONFIG.API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mode:mode,messages:hist})});
+if(r.status===429)throw{code:"rate_limited"};
+if(!r.ok)throw{code:"error"};
+var d=await r.json();cb(d.text);return{text:d.text};
+}
+function errText(e){return e&&e.code==="none"?"AI hozircha ulanmagan. Tayyor namuna savollarni tanlab ko'ring.":e&&e.code==="rate_limited"?"Juda tez-tez so'rayapsiz, birozdan keyin urinib ko'ring.":"Xatolik yuz berdi. Keyinroq urinib ko'ring."}
+function bind(form,input,box,sys,clear){
+var hist=[],busy=false;
+form.onsubmit=function(e){
+e.preventDefault();var v=input.value.trim();if(!v||busy)return;
+if(clear)box.innerHTML="";
+input.value="";hist.push({role:"user",content:v});
+var q=document.createElement("div");q.className="q";q.textContent=v;box.appendChild(q);
+var a=document.createElement("div");a.className="a live";a.textContent="Javob tayyorlanmoqda...";box.appendChild(a);
+box.scrollTop=box.scrollHeight;busy=true;
+ask(sys,hist,function(t){a.textContent=t;box.scrollTop=box.scrollHeight}).then(function(r){hist.push({role:"assistant",content:r.text});a.textContent=r.text}).catch(function(x){hist.pop();a.className="a err";a.textContent=errText(x)}).then(function(){busy=false});
+};
+}
+bind(document.getElementById("f1"),document.getElementById("i1"),msgs,SYS1,true);
+bind(document.getElementById("f2"),document.getElementById("i2"),document.getElementById("m2"),SYS2,false);
+var fab=document.getElementById("fab"),hp=document.getElementById("help");
+fab.onclick=function(){var o=hp.hidden;hp.hidden=!o;fab.setAttribute("aria-expanded",o);if(o)document.getElementById("i2").focus()};
+var books=[["Mehnat huquqi asoslari","Huquq","free"],["Shartnoma tuzish amaliyoti","Huquq","paid"],["Tadbirkor uchun soliq qo'llanmasi","Iqtisod","paid"],["Fuqarolik huquqi: qisqacha kurs","Huquq","free"]];
+var cat=document.getElementById("cat");
+function draw(f){cat.innerHTML="";books.forEach(function(b){if(f!=="all"&&b[2]!==f)return;var d=document.createElement("div");d.className="book";var h=document.createElement("h3");h.textContent=b[0];var p=document.createElement("p");p.textContent=b[1]+" · muallif: namuna";var t=document.createElement("span");t.className="tag"+(b[2]==="free"?" now":"");t.textContent=b[2]==="free"?"Bepul":"Pullik";d.appendChild(h);d.appendChild(p);d.appendChild(t);cat.appendChild(d)})}
+draw("all");
+[].forEach.call(document.querySelectorAll("#flt .tab"),function(b){b.onclick=function(){[].forEach.call(document.querySelectorAll("#flt .tab"),function(x){x.setAttribute("aria-selected",x===b)});draw(b.dataset.f)}});
+document.getElementById("bf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){document.getElementById("bt").value=String(r.result).slice(0,12000)};r.readAsText(f)};
+document.getElementById("bg").onclick=function(){
+var t=document.getElementById("bt").value.trim().slice(0,12000),o=document.getElementById("bo");
+if(!t){o.textContent="Avval kitob matnini kiriting.";return}
+o.textContent="Tahlil qilinmoqda...";
+var act=document.getElementById("ba").value;
+ask("book",[{role:"user",content:act+".\n\nKitob matni:\n"+t}],function(x){o.textContent=x}).then(function(r){o.textContent=r.text}).catch(function(x){o.textContent=errText(x)});
+};
+</script>
+</body>
+</html>
