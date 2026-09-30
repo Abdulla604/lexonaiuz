@@ -286,72 +286,104 @@ var demos=[
 {q:"Ijara shartnomasida nimalar bo'lishi shart?",a:["Kamida taraflar, ijara narxi va to'lov muddati, ijara muddati, uy holati va depozit tartibi yozilgan bo'lishi kerak.","Shartnomani imzolashdan oldin uy holatini birga tekshirib, dalolatnoma tuzib qo'ying."],s:"Manba: Fuqarolik kodeksi, ijara shartnomasi bo'limi"},
 {q:"Sifatsiz mahsulotni qaytarib bera olamanmi?",a:["Ha, sifatsiz mahsulotni almashtirish, ta'mirlash yoki pulni qaytarishni talab qilish mumkin. Chek va xarid dalilini saqlang.","Sotuvchi rad etsa, yozma da'vo bering va keyin iste'molchilar huquqini himoya qiluvchi organga murojaat qiling."],s:"Manba: Iste'molchilar huquqlarini himoya qilish to'g'risidagi qonun"}
 ];
+
 var msgs=document.getElementById("msgs"),chips=document.getElementById("chips");
 demos.forEach(function(d,i){
-var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=d.q;b.setAttribute("aria-pressed","false");
-b.onclick=function(){
-[].forEach.call(chips.children,function(c){c.setAttribute("aria-pressed","false")});
-b.setAttribute("aria-pressed","true");
-msgs.innerHTML="";
-var q=document.createElement("div");q.className="q";q.textContent=d.q;msgs.appendChild(q);
-var a=document.createElement("div");a.className="a";
-d.a.forEach(function(t){var p=document.createElement("p");p.textContent=t;a.appendChild(p)});
-var s=document.createElement("div");s.className="src";s.textContent=d.s;a.appendChild(s);
-msgs.appendChild(a);
-};
-chips.appendChild(b);
+  var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=d.q;b.setAttribute("aria-pressed","false");
+  b.onclick=function(){
+    [].forEach.call(chips.children,function(c){c.setAttribute("aria-pressed","false")});
+    b.setAttribute("aria-pressed","true");
+    msgs.innerHTML="";
+    var q=document.createElement("div");q.className="q";q.textContent=d.q;msgs.appendChild(q);
+    var a=document.createElement("div");a.className="a";
+    d.a.forEach(function(t){var p=document.createElement("p");p.textContent=t;a.appendChild(p)});
+    var s=document.createElement("div");s.className="src";s.textContent=d.s;a.appendChild(s);
+    msgs.appendChild(a);
+  };
+  chips.appendChild(b);
 });
+
 var tb=document.getElementById("t-b2b"),tc=document.getElementById("t-b2c"),pb=document.getElementById("p-b2b"),pc=document.getElementById("p-b2c");
 function sel(b2b){tb.setAttribute("aria-selected",b2b);tc.setAttribute("aria-selected",!b2b);pb.hidden=!b2b;pc.hidden=b2b}
 tb.onclick=function(){sel(true)};tc.onclick=function(){sel(false)};
+
+var CONFIG={API_URL:"/.netlify/functions/chat",FORM_URL:"",TELEGRAM:"",EMAIL:""};
+
 document.getElementById("wl").onsubmit=function(e){
-e.preventDefault();var f=this,o=document.getElementById("ok"),g=function(x){return document.getElementById(x).value};
-if(!CONFIG.FORM_URL){o.textContent="Ro'yxat hozircha ulanmagan. Keyinroq urinib ko'ring.";return}
-fetch(CONFIG.FORM_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:g("nm"),contact:g("ct"),role:g("rl")})}).then(function(r){if(!r.ok)throw 0;o.textContent="Rahmat! Sinov versiyasi ochilganda siz bilan bog'lanamiz.";f.reset()}).catch(function(){o.textContent="Yuborib bo'lmadi. Keyinroq urinib ko'ring."});
+  e.preventDefault();var f=this,o=document.getElementById("ok"),g=function(x){return document.getElementById(x).value};
+  if(!CONFIG.FORM_URL){o.textContent="Ro'yxat hozircha ulanmagan. Keyinroq urinib ko'ring.";return}
+  fetch(CONFIG.FORM_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:g("nm"),contact:g("ct"),role:g("rl")})}).then(function(r){if(!r.ok)throw 0;o.textContent="Rahmat! Sinov versiyasi ochilganda siz bilan bog'lanamiz.";f.reset()}).catch(function(){o.textContent="Yuborib bo'lmadi. Keyinroq urinib ko'ring."});
 };
+
 var cn=document.getElementById("cn");
 if(CONFIG.TELEGRAM){var t=document.createElement("a");t.href=CONFIG.TELEGRAM;t.textContent="Telegram";cn.appendChild(t);cn.appendChild(document.createTextNode(" "))}
 if(CONFIG.EMAIL){var m=document.createElement("a");m.href="mailto:"+CONFIG.EMAIL;m.textContent=CONFIG.EMAIL;cn.appendChild(m)}
 
-/* SOZLAMALAR: serveringiz tayyor bo'lgach to'ldiring */
-var CONFIG={API_URL:"",FORM_URL:"",TELEGRAM:"",EMAIL:""};
-var SYS1="legal",SYS2="help";
-async function ask(mode,hist,cb){
-if(!CONFIG.API_URL)throw{code:"none"};
-var r=await fetch(CONFIG.API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mode:mode,messages:hist})});
-if(r.status===429)throw{code:"rate_limited"};
-if(!r.ok)throw{code:"error"};
-var d=await r.json();cb(d.text);return{text:d.text};
+async function askAI(userMessage) {
+  var response = await fetch(CONFIG.API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: userMessage })
+  });
+
+  var data = await response.json();
+  if (!response.ok || data.error) {
+    throw new Error(data.error || "Server xatoligi yuz berdi");
+  }
+  return data.reply;
 }
-function errText(e){return e&&e.code==="none"?"AI hozircha ulanmagan. Tayyor namuna savollarni tanlab ko'ring.":e&&e.code==="rate_limited"?"Juda tez-tez so'rayapsiz, birozdan keyin urinib ko'ring.":"Xatolik yuz berdi. Keyinroq urinib ko'ring."}
-function bind(form,input,box,sys,clear){
-var hist=[],busy=false;
-form.onsubmit=function(e){
-e.preventDefault();var v=input.value.trim();if(!v||busy)return;
-if(clear)box.innerHTML="";
-input.value="";hist.push({role:"user",content:v});
-var q=document.createElement("div");q.className="q";q.textContent=v;box.appendChild(q);
-var a=document.createElement("div");a.className="a live";a.textContent="Javob tayyorlanmoqda...";box.appendChild(a);
-box.scrollTop=box.scrollHeight;busy=true;
-ask(sys,hist,function(t){a.textContent=t;box.scrollTop=box.scrollHeight}).then(function(r){hist.push({role:"assistant",content:r.text});a.textContent=r.text}).catch(function(x){hist.pop();a.className="a err";a.textContent=errText(x)}).then(function(){busy=false});
-};
+
+function bind(form, input, box, clear) {
+  var busy = false;
+  form.onsubmit = async function(e) {
+    e.preventDefault();
+    var v = input.value.trim();
+    if (!v || busy) return;
+    if (clear) box.innerHTML = "";
+    
+    input.value = "";
+    var q = document.createElement("div"); q.className = "q"; q.textContent = v; box.appendChild(q);
+    var a = document.createElement("div"); a.className = "a live"; a.textContent = "Javob tayyorlanmoqda..."; box.appendChild(a);
+    box.scrollTop = box.scrollHeight;
+    busy = true;
+
+    try {
+      var reply = await askAI(v);
+      a.textContent = reply;
+    } catch (err) {
+      a.className = "a err";
+      a.textContent = "Xatolik: " + err.message;
+    } finally {
+      busy = false;
+      box.scrollTop = box.scrollHeight;
+    }
+  };
 }
-bind(document.getElementById("f1"),document.getElementById("i1"),msgs,SYS1,true);
-bind(document.getElementById("f2"),document.getElementById("i2"),document.getElementById("m2"),SYS2,false);
+
+bind(document.getElementById("f1"), document.getElementById("i1"), msgs, true);
+bind(document.getElementById("f2"), document.getElementById("i2"), document.getElementById("m2"), false);
+
 var fab=document.getElementById("fab"),hp=document.getElementById("help");
 fab.onclick=function(){var o=hp.hidden;hp.hidden=!o;fab.setAttribute("aria-expanded",o);if(o)document.getElementById("i2").focus()};
+
 var books=[["Mehnat huquqi asoslari","Huquq","free"],["Shartnoma tuzish amaliyoti","Huquq","paid"],["Tadbirkor uchun soliq qo'llanmasi","Iqtisod","paid"],["Fuqarolik huquqi: qisqacha kurs","Huquq","free"]];
 var cat=document.getElementById("cat");
 function draw(f){cat.innerHTML="";books.forEach(function(b){if(f!=="all"&&b[2]!==f)return;var d=document.createElement("div");d.className="book";var h=document.createElement("h3");h.textContent=b[0];var p=document.createElement("p");p.textContent=b[1]+" · muallif: namuna";var t=document.createElement("span");t.className="tag"+(b[2]==="free"?" now":"");t.textContent=b[2]==="free"?"Bepul":"Pullik";d.appendChild(h);d.appendChild(p);d.appendChild(t);cat.appendChild(d)})}
 draw("all");
 [].forEach.call(document.querySelectorAll("#flt .tab"),function(b){b.onclick=function(){[].forEach.call(document.querySelectorAll("#flt .tab"),function(x){x.setAttribute("aria-selected",x===b)});draw(b.dataset.f)}});
+
 document.getElementById("bf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){document.getElementById("bt").value=String(r.result).slice(0,12000)};r.readAsText(f)};
-document.getElementById("bg").onclick=function(){
-var t=document.getElementById("bt").value.trim().slice(0,12000),o=document.getElementById("bo");
-if(!t){o.textContent="Avval kitob matnini kiriting.";return}
-o.textContent="Tahlil qilinmoqda...";
-var act=document.getElementById("ba").value;
-ask("book",[{role:"user",content:act+".\n\nKitob matni:\n"+t}],function(x){o.textContent=x}).then(function(r){o.textContent=r.text}).catch(function(x){o.textContent=errText(x)});
+document.getElementById("bg").onclick=async function(){
+  var t=document.getElementById("bt").value.trim().slice(0,12000),o=document.getElementById("bo");
+  if(!t){o.textContent="Avval kitob matnini kiriting.";return}
+  o.textContent="Tahlil qilinmoqda...";
+  var act=document.getElementById("ba").value;
+  try {
+    var reply = await askAI(act + ".\n\nKitob matni:\n" + t);
+    o.textContent = reply;
+  } catch (err) {
+    o.textContent = "Xatolik: " + err.message;
+  }
 };
 </script>
 </body>
